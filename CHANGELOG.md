@@ -1,26 +1,90 @@
+### v3.3.1 (2015-08-27):
+
+Hi all, this npm 3.x update brings you another round of bug fixes.  The
+headliner here is that `npm update` works again.  We're running down the
+clock on blocker 3.x issues!  Shortly after that hits zero we'll be
+promoting 3.x to latest!!
+
+And of course, we have changes that were brought forward from 2.x. Check out
+[@othiym23](https://github.com/othiym23)'s
+[2.14.1 release notes](https://github.com/npm/npm/releases/tag/v2.14.1).
+
+#### BETA WARNINGS FOR FUN AND PROFIT
+
+**_THIS IS BETA SOFTWARE_**. `npm@3` will remain in beta until we're
+confident that it's stable and have assessed the effect of the breaking
+changes on the community.  During that time we will still be doing `npm@2`
+releases, with `npm@2` tagged as `latest` and `next`.  We'll _also_ be
+publishing new releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest`
+alongside those versions until we're ready to switch everyone over to
+`npm@3`.  We need your help to find and fix its remaining bugs.  It's a
+significant rewrite, so we are _sure_ there still significant bugs
+remaining.  So do us a solid and deploy it in non-critical CI environments
+and for day-to-day use, but maybe don't use it for production maintenance or
+frontline continuous deployment just yet.
+
+#### NPM UPDATE, NOW AGAIN YOUR FRIEND
+
+* [`f130a00`](https://github.com/npm/npm/commit/f130a00)
+  [#9095](https://github.com/npm/npm/issues/9095)
+  `npm update` once again works! Previously, after selecting packages
+  to update, it would then pick the wrong location to run the install
+  from. ([@iarna](https://github.com/othiym23))
+
+#### INSTALL ORDER NOW MORE ORDERLY
+
+* [`d395a6b`](https://github.com/npm/npm/commit/d395a6b)
+  [#8995](https://github.com/npm/npm/issues/8995)
+  Certain combinations of packages could result in different install orders for their
+  initial installation than for reinstalls run on the same folder.
+  ([@iarna](https://github.com/othiym23))
+
+#### WATCH ME PULL THIS MODULE OUT OF MY HAT
+
+* [`d119ea6`](https://github.com/npm/npm/commit/d119ea6)
+  [#9113](https://github.com/npm/npm/issues/9113)
+  Make extraneous packages _always_ up in `npm ls`. Previously, if an
+  extraneous package had a dependency that depended back on the original
+  package this would result in the package not showing up in `ls`.
+  ([@iarna](https://github.com/othiym23))
+
+#### UNHELPFUL WARNINGS ARE UNHELPFUL
+
+* [`02420dc`](https://github.com/npm/npm/commit/02420dc)
+  [#9113](https://github.com/npm/npm/issues/9113)
+  Stop warning about missing top level package.json files. Errors in said
+  files will still be reported.
+  ([@iarna](https://github.com/othiym23))
+
+#### SOME DEPS OF DEPS UPDATES
+
+* [`b273bcc`](https://github.com/npm/npm/commit/b273bcc) mime-types@2.1.5
+* [`df6e225`](https://github.com/npm/npm/commit/df6e225) mime-db@1.17.0
+* [`785f2ad`](https://github.com/npm/npm/commit/785f2ad) is-my-json-valid@2.12.1
+* [`88170dd`](https://github.com/npm/npm/commit/88170dd) form-data@1.0.0-rc3
+* [`af5357b`](https://github.com/npm/npm/commit/af5357b) request@2.61.0
+* [`337f96a`](https://github.com/npm/npm/commit/337f96a) chalk@1.1.1
+
 ### v2.14.1 (2015-08-20):
 
 #### BETTER WINDOWS INTEGRATION, ONE STEP AT A TIME
 
-* [`e40e71f`](https://github.com/npm/npm/commit/e40e71f2f838a8a42392f44e3eeec04e323ab743)
+* [`58af7a7`](https://github.com/npm/npm/commit/58af7a788337d16adbc29745dbdd5de07798af50)
   [#6412](https://github.com/npm/npm/issues/6412) Improve the search strategy
-  used by the npm shims for Windows to prioritize your own local npm installs.
-  npm has really needed this tweak for a long time, so hammer on it and let us
-  know if you run into issues, but with luck it will Just Work.
+  used by the npm shims on Windows to prioritize user-installed npm. npm has really
+  needed this tweak for a long time, so hammer on it and let us know if you run into issues,
+  but with luck it will Just Work.
   ([@joaocgreis](https://github.com/joaocgreis))
-* [`204ebbb`](https://github.com/npm/npm/commit/204ebbb3e0cab696a429a878ceeb4a7e78ec2b94)
+* [`6dea4ef`](https://github.com/npm/npm/commit/6dea4ef5a2b6b08b5a46640d488d5e259ae76561)
   [#8751](https://github.com/npm/npm/issues/8751)
-  [#7333](https://github.com/npm/npm/issues/7333) Keep [autorun
-  scripts](https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx) from
-  interfering with npm package and lifecycle script execution on Windows by
-  adding `/d` and `/s` when invoking `cmd.exe`.
-  ([@saper](https://github.com/saper))
+  [#7333](https://github.com/npm/npm/issues/7333) Keep autorun scripts from
+  interfering with npm run script execution on Windows by addng `/d` and `/s`
+  when invoking `cmd.exe`. ([@saper](https://github.com/saper))
 
 #### IT SEEMED LIKE AN IDEA AT THE TIME
 
-* [`286f3d9`](https://github.com/npm/npm/commit/286f3d97103812f0fd84b70352addbe899e258f9)
-  [#9201](https://github.com/npm/npm/pull/9201) For a while npm was building
-  HTML partials for use on [`docs.npmjs.com`](https://docs.npmjs.com), but we
+* [`eafb6cd`](https://github.com/npm/npm/commit/eafb6cd6d5dbdb9423eed1c3be6b2094a65726c0)
+  For a while npm was building HTML partials for use on docs.npmjs.com, but we
   weren't actually using them. Stop building them, which makes running the full
   test suite and installation process around a third faster.
   ([@isaacs](https://github.com/isaacs))
@@ -28,7 +92,7 @@
 #### LESS CRUFTY ENVIRONMENTS
 
 * [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
-  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
+  `fstream-npm@1.0.5`: Stop publishing cruft (`config.gypi`) and per-project
   `.npmrc` files to keep local configuration out of published packages.
   ([@othiym23](https://github.com/othiym23))
 * [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
@@ -38,7 +102,7 @@
 
 #### A SINGLE LONELY DEPENDENCY UPGRADE
 
-* [`b343b95`](https://github.com/npm/npm/commit/b343b956ef777e321e4251ddc96ec6d80827d9e2)
+* [`b48e292`](https://github.com/npm/npm/commit/b48e292053178a526960586fce4bccb56fd10be0)
   `request@2.61.0`: Bug fixes and keep-alive tweaks.
   ([@simov](https://github.com/simov))
 
@@ -73,7 +137,6 @@ significant rewrite, so we are _sure_ there still significant bugs
 remaining.  So do us a solid and deploy it in non-critical CI environments
 and for day-to-day use, but maybe don't use it for production maintenance or
 frontline continuous deployment just yet.
-
 
 #### ONLY ALSO DEV
 
